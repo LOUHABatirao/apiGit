@@ -1,0 +1,71 @@
+# -------------------------
+# Node modules
+# -------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# -------------------------
+# Environment files
+# -------------------------
+.env
+.env.local
+.env.*.local
+
+# -------------------------
+# Logs
+# -------------------------
+logs/
+*.log
+log.txt
+debug.log
+
+# -------------------------
+# Build / Cache
+# -------------------------
+dist/
+build/
+.cache/
+.temp/
+
+# -------------------------
+# OS Files
+# -------------------------
+.DS_Store
+Thumbs.db
+
+# -------------------------
+# Nodemailer temp files
+# -------------------------
+tmp/
+mail/
+
+# -------------------------
+# Knex Migrations / Seeds (if needed)
+# -------------------------
+/migrations/*.lock
+/seeds/*.lock
+
+# -------------------------
+# VSCode / IDE
+# -------------------------
+.vscode/
+.idea/
+
+# -------------------------
+# PM2 Logs
+# -------------------------
+.pm2/logs/
+.pm2/pids/
+
+# -------------------------
+# Optional
+# -------------------------
+package-lock.json
+
+/public/reporting/data-google-analytics/*.json
+/public/reporting/data-facebook/*.php
+/public/reporting/data-facebook/index.php---
+
+
