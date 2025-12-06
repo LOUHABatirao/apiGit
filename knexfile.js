@@ -33,7 +33,7 @@ module.exports = {
     pool: { min: 2, max: 20 },
     migrations: {
       tableName: 'knex_migrations',
-      directory: './migrations'
+      directory: './db/migrations'
     }
   }
 };
