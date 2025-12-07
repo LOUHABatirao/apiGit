@@ -8,7 +8,7 @@ const table_authorized_apps = `${process.env.DB_PREFIX}_authorized_apps`;
 
 async function generateToken() {
     try {
-        const host = '41.77.113.181';
+        const host = 'localhost:3001';
         const name = 'Frontend Production'; // Give it a name
         
         console.log('Generating token for:', name);
