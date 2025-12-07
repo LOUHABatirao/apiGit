@@ -9,7 +9,7 @@ const table_authorized_apps = `${process.env.DB_PREFIX}_authorized_apps`;
 async function generateToken() {
     try {
         // The host that will use this token
-        const host = '41.77.113.181'; // Your frontend IP
+        const host = 'http://localhost:3001'; // Your frontend IP
         
         console.log('Generating token for host:', host);
         
