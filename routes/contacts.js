@@ -17,25 +17,42 @@ const postmarkApiKey = 'b34d12dd-a354-437d-be9c-195c2f333624';
 //send contact message
 router.post('/message', verifyApiToken, async (req, res) => {
     try {
+        console.log('Received contact form data:', req.body);
+
         const {
             name,
+            first_name,
+            last_name,
             email,
             phone,
+            tel,
             subject,
             message,
+            info,
             company
         } = req.body;
 
-        console.log('Received contact form:', { name, email, phone, subject });
+        // Handle different field name formats
+        const contactName = name || `${first_name || ''} ${last_name || ''}`.trim() || 'Unknown';
+        const contactPhone = phone || tel || '';
+        const contactMessage = message || info || '';
+        const contactSubject = subject || 'Contact Form';
+
+        console.log('Processed data:', {
+            contactName,
+            email,
+            contactPhone,
+            contactSubject
+        });
 
         // Save to database
         const [id] = await knex(contacts_table).insert({
-            "name": name,
-            "tel": phone,
+            "name": contactName,
+            "tel": contactPhone,
             "email": email,
             "company": company || null,
-            "info": message,
-            "subject": subject || 'Contact Form',
+            "info": contactMessage,
+            "subject": contactSubject,
             "source": 'website',
             "placement": 'contact_form',
             "created_at": knex.fn.now(),
@@ -53,14 +70,14 @@ router.post('/message', verifyApiToken, async (req, res) => {
             "ReplyTo": email,
             "TemplateAlias": "contact",
             "TemplateModel": {
-                "name": name,
+                "name": contactName,
                 "email": email,
-                "phone": phone,
-                "subject": subject,
-                "message": message
+                "phone": contactPhone,
+                "subject": contactSubject,
+                "message": contactMessage
             }
         }).then(response => {
-            console.log("Email sent successfully to:", response.To);
+            console.log("Email sent successfully");
             res.status(200).json({ 
                 success: true,
                 message: 'Message sent successfully',
@@ -68,7 +85,6 @@ router.post('/message', verifyApiToken, async (req, res) => {
             });
         }).catch(error => {
             console.log("Email failed but contact saved:", error.message);
-            // Still return success since we saved to database
             res.status(200).json({ 
                 success: true,
                 message: 'Message saved successfully',
@@ -86,8 +102,6 @@ router.post('/message', verifyApiToken, async (req, res) => {
         });
     }
 });
-
-module.exports = router;
 
 //Get all contacts
 router.get('/', verifyAuthToken, verifyApiToken, async (req, res) => {
