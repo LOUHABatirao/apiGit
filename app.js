@@ -37,6 +37,7 @@ const locos = require('./routes/locos');
 const locos_bo = require('./routes/locos_bo');
 const reservations = require('./routes/reservations');
 const contacts = require('./routes/contacts');
+const payment = require('./routes/payment');
 const path = require('path');
 
 
@@ -63,6 +64,7 @@ app.use('/api/locos', locos);
 app.use('/api/reservations', reservations);
 app.use('/api/contacts', contacts);
 app.use('/api/locos-bo', locos_bo);
+app.use('/api/payement', payment);
 
 
 // auth Middlewares 
