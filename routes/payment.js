@@ -11,7 +11,7 @@ const verifyApiToken = require('../verify/verifyApiToken');
 const table_payments = `${process.env.DB_PREFIX}_payments`;
 
 // Initiate payment
-router.post('/initiate-payement', verifyApiToken, async (req, res) => {
+router.post('/initiate-payement', async (req, res) => {
     try {
         // Basic validation
         const { amount, currency, description, user_id } = req.body;
